@@ -1,25 +1,14 @@
 // src/HomePage.js
-import logo from "./assets/img/argentBankLogo.png";
+
 import inconChat from "./assets/img/icon-chat.png";
 import moneyIcon from "./assets/img/icon-money.png";
 import securityIcon from "./assets/img/icon-security.png";
-import { Link } from "react-router-dom";
+
 
 function HomePage() {
 	return (
 		<>
-			<nav className="main-nav">
-				<Link to="/" className="main-nav-logo">
-					<img src={logo} alt="Argent Bank logo" />
-					<h1 className="sr-only">Argent Bank</h1>
-				</Link>
-				<div>
-					<Link to="/signin" className="main-nav-item">
-						<i className="fa fa-user-circle"></i>
-						Sign in
-					</Link>
-				</div>
-			</nav>
+			
 			<main>
 				<div className="hero">
 					<section className="hero-content">
