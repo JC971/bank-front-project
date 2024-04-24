@@ -19,7 +19,8 @@ body {
 
 .bg-dark {
 	background-color: #12002b;
-  min-height: 100vh;
+	border: solid #12002b 1px;
+height: 100vh;
 }
 
 .sr-only {
@@ -172,7 +173,8 @@ body {
 	width: 300px;
 	margin: 0 auto;
 	margin-top: 3rem;
-	padding: 0 2rem 0 2rem;
+	padding:  2rem;
+	
   
 }
 
