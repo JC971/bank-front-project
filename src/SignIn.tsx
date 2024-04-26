@@ -1,6 +1,6 @@
 import SignForm from "./SignForm";
 
-function signIn() {
+function SignIn() {
 	return (
 		<>
 			<main className="main bg-dark">
@@ -14,4 +14,4 @@ function signIn() {
 	);
 }
 
-export default signIn;
+export default SignIn;

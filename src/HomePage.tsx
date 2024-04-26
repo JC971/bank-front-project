@@ -1,4 +1,3 @@
-// src/HomePage.js
 
 import inconChat from "./assets/img/icon-chat.png";
 import moneyIcon from "./assets/img/icon-money.png";
