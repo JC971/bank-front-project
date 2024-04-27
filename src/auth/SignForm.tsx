@@ -60,13 +60,13 @@ export default SignForm;
 
 */
 import { useState } from "react";
-import { useDispatch } from "./hooks";
-import { signIn } from "./authentSlice";
+import { useDispatch } from "../hooks";
+import { signIn } from "../authentSlice";
 import { useNavigate } from "react-router-dom";
 
 function SignForm() {
 	const dispatch = useDispatch();
-	const navigate = useNavigate(); 
+	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -122,4 +122,3 @@ function SignForm() {
 }
 
 export default SignForm;
-
