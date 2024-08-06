@@ -1,17 +1,11 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAccounts } from "./userSlice";
+//import { useEffect } from "react";
+//import { useSelector } from "react-redux";
+//import { fetchAccounts } from "../slices/userSlice";
+import { RootState, useAppDispatch } from "../../redux/store";
 
 export default function User() {
-	const dispatch = useDispatch();
-	const { accounts, isLoading, error } = useSelector((state) => state.user);
+	const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		dispatch(fetchAccounts());
-	}, [dispatch]);
-
-	if (isLoading) return <p>Loading...</p>;
-	if (error) return <p>Error: {error}</p>;
 	return (
 		<main className="main bg-dark">
 			<div className="header">

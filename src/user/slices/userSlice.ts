@@ -1,6 +1,5 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserState, Account } from "./userTypes";
+import { UserState, Account } from "../userTypes";
 
 export const fetchAccounts = createAsyncThunk(
 	"user/fetchAccounts",
@@ -11,7 +10,7 @@ export const fetchAccounts = createAsyncThunk(
 				{
 					method: "GET",
 					headers: {
-						Authorization: `Bearer ${localStorage.getItem("token")}`, 
+						Authorization: `Bearer ${localStorage.getItem("token")}`,
 						"Content-Type": "application/json",
 					},
 				}
@@ -26,10 +25,12 @@ export const fetchAccounts = createAsyncThunk(
 		}
 	}
 );
+
 const initialState: UserState = {
 	accounts: [],
 	isLoading: false,
 	error: null,
+	token: null,
 };
 
 const userSlice = createSlice({

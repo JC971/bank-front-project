@@ -1,11 +1,10 @@
-// src/App.js
 
 import { Routes, Route } from "react-router-dom";
-import Navigation from "./Component/Nav";
-import HomePage from "./HomePage";
-import SignIn from "./auth/SignIn";
-import User from "./user/user";
-import Footer from "./footer";
+import Navigation from "./Nav";
+import HomePage from "../HomePage";
+import SignIn from "../auth/ui/SignIn.component";
+import User from "../user/ui/User";
+import Footer from "./Footer";
 
 function App() {
 	return (

@@ -4,10 +4,13 @@ export interface Account {
 	title: string;
 	amount: string;
 	description: string;
+	token: null;
+	
 }
 
 export interface UserState {
 	accounts: Account[];
 	isLoading: boolean;
 	error: string | null;
+	token:  null;
 }
