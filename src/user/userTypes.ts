@@ -1,16 +1,18 @@
 
-export interface Account {
-	id: string;
-	title: string;
-	amount: string;
-	description: string;
-	token: null;
-	
-}
+
 
 export interface UserState {
-	accounts: Account[];
+	//firs name last name
 	isLoading: boolean;
 	error: string | null;
-	token:  null;
+	firstName: string | null;
+	lastName: string | null;
 }
+
+
+
+export type UserData = {
+    email: string;
+    accountCreated: string;
+    
+};

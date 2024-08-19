@@ -1,36 +1,40 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserState, Account } from "../userTypes";
+import { UserState } from "../userTypes";
+
 
 export const fetchAccounts = createAsyncThunk(
 	"user/fetchAccounts",
 	async (_, { rejectWithValue }) => {
 		try {
 			const response = await fetch(
-				"http://localhost:3001/api/v1/user/accounts",
+				"http://localhost:3001/api/v1/user/profile",//? verifier daqns swagger du back
 				{
-					method: "GET",
+					method: "post",
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem("token")}`,
 						"Content-Type": "application/json",
 					},
+					
 				}
 			);
-			const data = await response.json();
+			const data = await response.json();console.log(data, 'echo')
 			if (!response.ok) {
 				throw new Error(data.message || "Failed to fetch accounts");
 			}
-			return data.accounts as Account[];
+			
+			console.log('voila')
+			return data.body
 		} catch (error) {
 			return rejectWithValue((error as Error).message);
 		}
-	}
+	} 
 );
 
 const initialState: UserState = {
-	accounts: [],
 	isLoading: false,
 	error: null,
-	token: null,
+	firstName: "",
+	lastName: "",
 };
 
 const userSlice = createSlice({
@@ -38,8 +42,13 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		clearAccounts(state) {
-			state.accounts = [];
 			state.error = null;
+		},
+		setFirstName(state, action) {
+			state.firstName = action.payload; //first name
+		},
+		setLastName(state, action) {
+			state.lastName = action.payload; //last name
 		},
 	},
 	extraReducers: (builder) => {
@@ -49,8 +58,10 @@ const userSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(fetchAccounts.fulfilled, (state, action) => {
-				state.accounts = action.payload;
+				//firs last name
 				state.isLoading = false;
+				state.firstName = action.payload.firstName; 
+				state.lastName = action.payload.lastName; 
 			})
 			.addCase(fetchAccounts.rejected, (state, action) => {
 				state.error = action.payload as string;
@@ -59,5 +70,6 @@ const userSlice = createSlice({
 	},
 });
 
-export const { clearAccounts } = userSlice.actions;
+export const { clearAccounts, setFirstName, setLastName } = userSlice.actions;
+
 export default userSlice.reducer;

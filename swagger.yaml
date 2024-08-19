@@ -12,7 +12,7 @@ paths:
   /user/transactions:
     get:
       tags:
-        - User Module
+        - Transaction Module
       summary: Retrieve all transactions during the current month
       description: Retrieves a list of transactions for a specified month
       parameters:
@@ -30,11 +30,13 @@ paths:
             $ref: '#/definitions/TransactionsResponse'
         '400':
           description: Invalid Fields
+        '404':
+          description: Transaction not found  
         '500':
           description: Internal Server Error
     post:
       tags:
-        - User Module
+        - Transaction Module
       summary: Add a new transaction
       security:
         - Bearer: []
@@ -45,7 +47,7 @@ paths:
           description: JWT token for authentication
           required: true
         - in: body
-          name: body
+          name: response
           required: true
           schema:
             $ref: '#/definitions/Transaction'
@@ -62,6 +64,8 @@ paths:
           description: Internal Server Error
   /user/transactions/{transactionId}:
     get:
+      tags:
+        - Transaction Module
       summary: Details of a transaction
       description: Retrieves detailed information for a specific transaction
       parameters:
@@ -82,12 +86,12 @@ paths:
         '500':
           description: Internal Server Error
     put:
-      security:
-        - Bearer: []
       tags:
-        - User Module
+        - Transaction Module
       summary: Modify an existing transaction
       description: Updates the specified transaction details
+      security:
+        - Bearer: []
       parameters:
         - in: path
           name: transactionId
@@ -104,6 +108,8 @@ paths:
           description: Transaction successfully updated
         '400':
           description: Invalid transaction
+        '404':
+          description: Transaction not found
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -115,15 +121,21 @@ definitions:
   Transaction:
     type: object
     properties:
-      Id:
+      id:
         type: string
         description: Unique transaction identifier
-      month:
+      transactionType:
         type: string
-        description: Current month
-      date:
+        description: Transaction type of the transaction
+      category:
         type: string
-        description: Transaction date
+        description: Category of the transaction
+      notes:
+        type: string
+        description: Notes of the transaction
+      description:
+        type: string
+        description: Description of the transaction
       amount:
         type: number
         format: float
@@ -134,6 +146,7 @@ definitions:
         description: Account balance after the transaction
     required:
       - date
+      - description
       - amount
       - balance
   TransactionsResponse:
@@ -144,6 +157,7 @@ definitions:
         items:
           $ref: '#/definitions/Transaction'
   User:
+    type: object
     properties:
       email:
         type: string
@@ -158,6 +172,7 @@ definitions:
         type: string
         description: User last name
   Login:
+    type: object
     properties:
       email:
         type: string
@@ -189,5 +204,7 @@ definitions:
     properties:
       firstName:
         type: string
+        description: User first name
       lastName:
         type: string
+        description: User last name

@@ -16,7 +16,8 @@ export const signIn = createAsyncThunk(
 			});
 			const data = await response.json();
 			if (response.ok) {
-				return { token: data.token };
+				localStorage.setItem("token", data.body.token);
+				return { token: data.body.token };
 			} else {
 				return thunkAPI.rejectWithValue(data.error);
 			}
