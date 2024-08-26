@@ -1,34 +1,7 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { UserState } from "../userTypes";
-
-
-export const fetchAccounts = createAsyncThunk(
-	"user/fetchAccounts",
-	async (_, { rejectWithValue }) => {
-		try {
-			const response = await fetch(
-				"http://localhost:3001/api/v1/user/profile",//? verifier daqns swagger du back
-				{
-					method: "post",
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("token")}`,
-						"Content-Type": "application/json",
-					},
-					
-				}
-			);
-			const data = await response.json();console.log(data, 'echo')
-			if (!response.ok) {
-				throw new Error(data.message || "Failed to fetch accounts");
-			}
-			
-			console.log('voila')
-			return data.body
-		} catch (error) {
-			return rejectWithValue((error as Error).message);
-		}
-	} 
-);
+import { updateProfile } from "../usecases/update-profile";
+import { fetchProfile } from "../usecases/fetch-profile";
 
 const initialState: UserState = {
 	isLoading: false,
@@ -41,35 +14,45 @@ const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		clearAccounts(state) {
+		logoutUser(state) {
+			state.firstName = "";
+			state.lastName = "";
 			state.error = null;
-		},
-		setFirstName(state, action) {
-			state.firstName = action.payload; //first name
-		},
-		setLastName(state, action) {
-			state.lastName = action.payload; //last name
+			state.isLoading = false;
 		},
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchAccounts.pending, (state) => {
+			.addCase(fetchProfile.pending, (state) => {
 				state.isLoading = true;
 				state.error = null;
 			})
-			.addCase(fetchAccounts.fulfilled, (state, action) => {
+			.addCase(fetchProfile.fulfilled, (state, action) => {
 				//firs last name
 				state.isLoading = false;
-				state.firstName = action.payload.firstName; 
-				state.lastName = action.payload.lastName; 
+				state.firstName = action.payload.firstName;
+				state.lastName = action.payload.lastName;
 			})
-			.addCase(fetchAccounts.rejected, (state, action) => {
+			.addCase(fetchProfile.rejected, (state, action) => {
+				state.error = action.payload as string;
+				state.isLoading = false;
+			})
+			.addCase(updateProfile.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(updateProfile.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.firstName = action.payload.firstName;
+				state.lastName = action.payload.lastName;
+				state.error = null;
+			})
+			.addCase(updateProfile.rejected, (state, action) => {
 				state.error = action.payload as string;
 				state.isLoading = false;
 			});
 	},
 });
 
-export const { clearAccounts, setFirstName, setLastName } = userSlice.actions;
+export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

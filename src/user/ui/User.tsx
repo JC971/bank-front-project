@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RootState, useAppDispatch } from "../../redux/store";
-import { fetchAccounts } from "../slices/userSlice";
+import { fetchProfile } from "../usecases/fetch-profile";
+import { updateProfile } from "../usecases/update-profile";
 
+import "./user.css";
 
 export default function User() {
 	const dispatch = useAppDispatch();
@@ -10,38 +12,103 @@ export default function User() {
 		(state: RootState) => state.user
 	);
 
-	
-	const token = useSelector((state: RootState) => state.auth.token);
-	
+	const token = localStorage.getItem("token");
 
 	useEffect(() => {
 		if (token) {
-			dispatch(fetchAccounts());
+			dispatch(fetchProfile());
 		}
-	}, [token, dispatch]); 
+	}, [token, dispatch]);
 	console.log("User State:", { firstName, lastName, isLoading, error });
-	console.log('coucou')
+
+	//
+	const [newFirstName, setNewFirstName] = useState(firstName || "");
+	const [newLastName, setNewLastName] = useState(lastName || "");
+	const [editButton, setEditButton] = useState(false);
+
+	const editNameButton = (e) => {
+		e.preventDefault();
+		setEditButton((current) => !current);
+	};
+
+	const submitHandler = async (e) => {
+		e.preventDefault();
+		try {
+			const resultAction = await dispatch(
+				updateProfile({ firstName: newFirstName, lastName: newLastName })
+			);
+			//
+			if (updateProfile.fulfilled.match(resultAction)) {
+				setEditButton(false);
+			} else {
+				throw new Error("Failed");
+			}
+		} catch (error) {
+			console.log("bad day");
+		}
+	};
 
 	if (isLoading) {
 		return <p>Loading...</p>;
 	}
 
 	if (error) {
-		return <p>Error: {error}</p>; 
+		return <p>Error: {error}</p>;
 	}
 
-	
 	return (
 		<main className="main bg-dark">
 			<div className="header">
-				<h1>
-					Welcome back
-					<br />
-					{firstName} {lastName}! {/*conditions input quand press button true false ! autre bouton */}
-				</h1>
-				<button className="edit-button">Edit Name</button>
+				<h1>Welcome back</h1>{" "}
+				<form onSubmit={submitHandler} className="profile-form">
+					<div className="pro-form">
+						{editButton ? (
+							<>
+								<input
+									type="text"
+									value={newFirstName}
+									onChange={(e) => setNewFirstName(e.target.value)}
+									placeholder="votre nom"
+									className="input-first-name"
+								/>
+								<input
+									type="text"
+									value={newLastName}
+									onChange={(e) => setNewLastName(e.target.value)}
+									placeholder="votre prénom"
+									className="input-last-name"
+								/>
+							</>
+						) : (
+								<>
+									<button className="name"> 
+										<span>{firstName}</span>
+									</button>
+									<button className="surname"> 
+								<span>{lastName}</span></button>
+							</>
+						)}
+					</div>
+					<div>
+						{editButton ? (
+							<>
+								<button onClick={editNameButton} className="edit-button">
+									Annuler
+								</button>
+
+								<button type="submit" className="edit-button">
+									Save
+								</button>
+							</>
+						) : (
+							<button onClick={editNameButton} className="edit-button">
+								Edit Name
+							</button>
+						)}
+					</div>
+				</form>
 			</div>
-			
+
 			<h2 className="sr-only">Accounts</h2>
 			<section className="account">
 				<div className="account-content-wrapper">

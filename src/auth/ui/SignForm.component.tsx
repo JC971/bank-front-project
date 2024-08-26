@@ -8,9 +8,11 @@ function SignForm() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		setErrorMessage("");
 		console.log("les infos:", email, password);
 
 		try {
@@ -20,14 +22,17 @@ function SignForm() {
 				navigate("/user"); // Navigate to user page on success
 			} else {
 				console.error("Failed to sign in");
+				
 			}
 		} catch (error) {
 			console.error("Sign in error:", error);
+			
 		}
 	};
 
 	return (
 		<form onSubmit={handleSubmit}>
+			{errorMessage && <div className="error-message">{errorMessage}</div>}
 			<div className="input-wrapper">
 				<label htmlFor="username">Username</label>
 				<input

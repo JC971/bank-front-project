@@ -19,5 +19,17 @@ function Navigation() {
 			</div>
 		);
 }
-
+// afficher log out 
 export default Navigation
+
+/*const handleLogout = () => {
+		dispatch(logoutUser());
+		localStorage.removeItem('token');
+	navigate('/')
+		console.log("aie");
+	}*/
+
+
+	/*<button onClick={handleLogout} className="logout-button">
+					<i className="fa fa-sign-out"></i>
+				</button> */

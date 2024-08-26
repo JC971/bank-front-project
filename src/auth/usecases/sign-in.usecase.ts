@@ -28,7 +28,7 @@ export const signIn = createAsyncThunk(
 					message: error.message,
 				});
 			} else {
-				// Handle non-Error objects thrown
+				
 				return thunkAPI.rejectWithValue({
 					code: "UNKNOWN-ERROR",
 					message: "An unknown error occurred",

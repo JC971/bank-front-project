@@ -1,0 +1,42 @@
+.user-name,
+.user-lastName
+{
+    margin: 10px;
+    width:120px;
+    height: 30px;
+}
+
+.input-first-name,
+.input-last-name
+{
+   margin: 10px;
+    width:120px;
+    height: 30px;
+}
+
+.profile-form{
+display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+   
+}
+
+.pro-form{
+   
+    height: 30px;
+
+}
+
+.name,
+.surname{
+    height: 100%;
+    width: 12%;
+   margin: 8px;
+}
+
+.edit-button{
+    margin: 18px;
+}
