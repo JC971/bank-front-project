@@ -80,28 +80,29 @@ export default function User() {
 								/>
 							</>
 						) : (
-								<>
-									<button className="name"> 
-										<span>{firstName}</span>
-									</button>
-									<button className="surname"> 
-								<span>{lastName}</span></button>
+							<>
+								<button className="name">
+									<span>{firstName}</span>
+								</button>
+								<button className="surname">
+									<span>{lastName}</span>
+								</button>
 							</>
 						)}
 					</div>
 					<div>
 						{editButton ? (
 							<>
-								<button onClick={editNameButton} className="edit-button">
+								<button onClick={editNameButton} className="cancel-button">
 									Annuler
 								</button>
 
-								<button type="submit" className="edit-button">
+								<button type="submit" className="save-button">
 									Save
 								</button>
 							</>
 						) : (
-							<button onClick={editNameButton} className="edit-button">
+							<button onClick={editNameButton} className="name-change">
 								Edit Name
 							</button>
 						)}

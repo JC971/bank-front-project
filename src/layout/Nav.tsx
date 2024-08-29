@@ -1,35 +1,38 @@
 import logo from "../assets/img/argentBankLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../user/slices/userSlice";
 
 function Navigation() {
-    return (
-			<div>
-				<nav className="main-nav">
-					<Link to="/" className="main-nav-logo">
-						<img src={logo} alt="Argent Bank logo" />
-						<h1 className="sr-only">Argent Bank</h1>
-					</Link>
-					<div>
-						<Link to="/signin" className="main-nav-item">
-							<i className="fa fa-user-circle"></i>
-							Sign in
-						</Link>
-					</div>
-				</nav>
-			</div>
-		);
-}
-// afficher log out 
-export default Navigation
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-/*const handleLogout = () => {
+	const handleLogout = () => {
 		dispatch(logoutUser());
-		localStorage.removeItem('token');
-	navigate('/')
+		localStorage.removeItem("token");
+		navigate("/");
 		console.log("aie");
-	}*/
+	};
 
+	return (
+		<div>
+			<nav className="main-nav">
+				<Link to="/" className="main-nav-logo">
+					<img src={logo} alt="Argent Bank logo" />
+					<h1 className="sr-only">Argent Bank</h1>
+				</Link>
+				<div>
+					<Link to="/signin" className="main-nav-item">
+						<i className="fa fa-user-circle"></i>
+						Sign in
+					</Link>
+					<button onClick={handleLogout} className="main-nav-item">
+						<i className="fa fa-sign-out"></i>
+					</button>
+				</div>
+			</nav>
+		</div>
+	);
+}
 
-	/*<button onClick={handleLogout} className="logout-button">
-					<i className="fa fa-sign-out"></i>
-				</button> */
+export default Navigation;

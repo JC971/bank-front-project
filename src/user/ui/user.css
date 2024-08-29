@@ -1,42 +1,44 @@
-.user-name,
-.user-lastName
-{
-    margin: 10px;
-    width:120px;
-    height: 30px;
+.profile-form {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: stretch;
+	align-content: stretch;
+	/*border: solid red 2px;*/
+	height: 110px;
+}
+
+.pro-form {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	height: 40px;
 }
 
 .input-first-name,
-.input-last-name
-{
-   margin: 10px;
-    width:120px;
-    height: 30px;
-}
-
-.profile-form{
-display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch;
-   
-}
-
-.pro-form{
-   
-    height: 30px;
-
+.input-last-name {
+	width: 12%;
+	height: 40px;
 }
 
 .name,
-.surname{
-    height: 100%;
-    width: 12%;
-   margin: 8px;
+.surname {
+	width: 12%;
+	height: 100%;
 }
 
-.edit-button{
-    margin: 18px;
+.name-change {
+	height: 40px;
+	width: 12%;
+	background-color: #00bc77;
+	color: white;
+}
+
+.cancel-button,
+.save-button {
+	height: 40px;
+	width: 8%;
+	margin: 4px;
+	color: #00bc77;
 }

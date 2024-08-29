@@ -1,9 +1,9 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: '1.0.0'
-  termsOfService: 'http://swagger.io/terms/'
+  version: "1.0.0"
+  termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -24,15 +24,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: List of transactions for the current month
           schema:
-            $ref: '#/definitions/TransactionsResponse'
-        '400':
+            $ref: "#/definitions/TransactionsResponse"
+        "400":
           description: Invalid Fields
-        '404':
-          description: Transaction not found  
-        '500':
+        "404":
+          description: Transaction not found
+        "500":
           description: Internal Server Error
     post:
       tags:
@@ -50,17 +50,17 @@ paths:
           name: response
           required: true
           schema:
-            $ref: '#/definitions/Transaction'
+            $ref: "#/definitions/Transaction"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful transaction
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/transactions/{transactionId}:
     get:
@@ -77,13 +77,13 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Transaction details
           schema:
-            $ref: '#/definitions/Transaction'
-        '400':
+            $ref: "#/definitions/Transaction"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
     put:
       tags:
@@ -102,15 +102,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Transaction'
+            $ref: "#/definitions/Transaction"
       responses:
-        '200':
+        "200":
           description: Transaction successfully updated
-        '400':
+        "400":
           description: Invalid transaction
-        '404':
+        "404":
           description: Transaction not found
-        '500':
+        "500":
           description: Internal Server Error
 securityDefinitions:
   Bearer:
@@ -155,7 +155,7 @@ definitions:
       transactions:
         type: array
         items:
-          $ref: '#/definitions/Transaction'
+          $ref: "#/definitions/Transaction"
   User:
     type: object
     properties:

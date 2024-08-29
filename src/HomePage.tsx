@@ -2,8 +2,6 @@ import inconChat from "./assets/img/icon-chat.png";
 import moneyIcon from "./assets/img/icon-money.png";
 import securityIcon from "./assets/img/icon-security.png";
 
-	
-
 function HomePage() {
 	return (
 		<>
@@ -17,7 +15,6 @@ function HomePage() {
 						<p className="text">
 							Open a savings account with Argent Bank today!
 						</p>
-						
 					</section>
 				</div>
 				<section className="features">
@@ -28,7 +25,6 @@ function HomePage() {
 							Need to talk to a representative? You can get in touch through our
 							24/7 chat or through a phone call in less than 5 minutes.
 						</p>
-						
 					</div>
 					<div className="feature-item">
 						<img src={moneyIcon} alt="Money Icon" className="feature-icon" />
@@ -38,7 +34,6 @@ function HomePage() {
 						<p>
 							The more you save with us, the higher your interest rate will be!
 						</p>
-					
 					</div>
 					<div className="feature-item">
 						<img

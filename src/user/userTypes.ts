@@ -1,6 +1,3 @@
-
-
-
 export interface UserState {
 	//firs name last name
 	isLoading: boolean;
@@ -9,10 +6,7 @@ export interface UserState {
 	lastName: string | null;
 }
 
-
-
 export type UserData = {
-    email: string;
-    accountCreated: string;
-    
+	email: string;
+	accountCreated: string;
 };

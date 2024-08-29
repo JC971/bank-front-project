@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/store";
 import { signIn } from "../usecases/sign-in.usecase";
+import "./signForm.component.css";
 
 function SignForm() {
 	const dispatch = useAppDispatch();
@@ -22,11 +23,11 @@ function SignForm() {
 				navigate("/user"); // Navigate to user page on success
 			} else {
 				console.error("Failed to sign in");
-				
+				setErrorMessage("Mail ou mot de passe invalide");
 			}
 		} catch (error) {
 			console.error("Sign in error:", error);
-			
+			setErrorMessage("Une erreur inatendue c'est produite...");
 		}
 	};
 
