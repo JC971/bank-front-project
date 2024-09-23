@@ -18,9 +18,9 @@ function SignForm() {
 
 		try {
 			const actionResult = await dispatch(signIn({ email, password }));
-			// Check if signIn was successful before navigating
+			// vérification 
 			if (signIn.fulfilled.match(actionResult)) {
-				navigate("/user"); // Navigate to user page on success
+				navigate("/user"); // Navigation avec succés
 			} else {
 				console.error("Failed to sign in");
 				setErrorMessage("Mail ou mot de passe invalide");

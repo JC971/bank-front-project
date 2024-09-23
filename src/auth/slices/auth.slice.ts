@@ -25,13 +25,12 @@ const authSlice = createSlice({
 			})
 			.addCase(signIn.fulfilled, (state, action) => {
 				if (action.payload && action.payload.token) {
-					console.log("Payload received:", action.payload);
+					//console.log("Payload received:", action.payload);
 
 					state.token = action.payload.token;
 					state.isLoading = false;
 					state.error = null;
 				} else {
-					// Handle case where payload is undefined
 					state.isLoading = false;
 					state.error = { code: "NO_DATA", message: "No data received" };
 				}

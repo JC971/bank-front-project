@@ -68,25 +68,25 @@ export default function User() {
 									type="text"
 									value={newFirstName}
 									onChange={(e) => setNewFirstName(e.target.value)}
-									placeholder="votre nom"
+									placeholder="votre prénom"
 									className="input-first-name"
 								/>
 								<input
 									type="text"
 									value={newLastName}
 									onChange={(e) => setNewLastName(e.target.value)}
-									placeholder="votre prénom"
+									placeholder="votre nom"
 									className="input-last-name"
 								/>
 							</>
 						) : (
 							<>
-								<button className="name">
+								<span className="name">
 									<span>{firstName}</span>
-								</button>
-								<button className="surname">
+								</span>
+								<span className="surname">
 									<span>{lastName}</span>
-								</button>
+								</span>
 							</>
 						)}
 					</div>

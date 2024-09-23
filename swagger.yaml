@@ -208,3 +208,171 @@ definitions:
       lastName:
         type: string
         description: User last name
+
+smartbear.comsmartbear.com
+Terms of Use | SmartBear Software
+End-User License Agreement between SmartBear Software and customers from USA & Canada.
+
+
+Blandine R
+  15 h 25
+swagger: "2.0"
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: "1.0.0"
+  termsOfService: "http://swagger.io/terms/"
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /user/transactions:
+    get:
+      tags:
+        - Transaction Module
+      summary: Retrieve all transactions during the current month
+      description: Retrieves a list of transactions for a specified month
+      parameters:
+        - in: query
+          name: month
+          type: string
+          description: Month for which transactions are requested
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: List of transactions for the current month
+          schema:
+            $ref: "#/definitions/TransactionsResponse"
+        "400":
+          description: Invalid Fields
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Server Error
+    post:
+      tags:
+        - Transaction Module
+      summary: Add a new transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          description: JWT token for authentication
+          required: true
+        - in: body
+          name: response
+          required: true
+          schema:
+            $ref: "#/definitions/Transaction"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful transaction
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+  /user/transactions/{transactionId}:
+    get:
+      tags:
+        - Transaction Module
+      summary: Details of a transaction
+      description: Retrieves detailed information for a specific transaction
+      parameters:
+        - in: path
+          name: transactionId
+          type: string
+          description: Unique identifier for a specific transaction
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transaction details
+          schema:
+            $ref: "#/definitions/Transaction"
+        "400":
+          description: Invalid Fields
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Server Error
+    put:
+      tags:
+        - Transaction Module
+      summary: Modify an existing transaction
+      description: Updates the specified transaction details
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionId
+          type: string
+          description: Transaction identifier
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/Transaction"
+      responses:
+        "200":
+          description: Transaction successfully updated
+        "400":
+          description: Invalid transaction
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique transaction identifier
+      transactionType:
+        type: string
+        description: Transaction type of the transaction
+      category:
+        type: string
+        description: Category of the transaction
+      notes:
+        type: string
+        description: Notes of the transaction
+      description:
+        type: string
+        description: Description of the transaction
+      amount:
+        type: number
+        format: float
+        description: Amount of the transaction
+      balance:
+        type: number
+        format: float
+        description: Account balance after the transaction
+    required:
+      - date
+      - description
+      - amount
+      - balance
+  TransactionsResponse:
+    type: object
+    properties:
+      transactions:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"

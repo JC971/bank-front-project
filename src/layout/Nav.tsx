@@ -11,8 +11,9 @@ function Navigation() {
 		dispatch(logoutUser());
 		localStorage.removeItem("token");
 		navigate("/");
-		console.log("aie");
 	};
+
+	const token = localStorage.getItem("token");
 
 	return (
 		<div>
@@ -22,13 +23,16 @@ function Navigation() {
 					<h1 className="sr-only">Argent Bank</h1>
 				</Link>
 				<div>
-					<Link to="/signin" className="main-nav-item">
-						<i className="fa fa-user-circle"></i>
-						Sign in
-					</Link>
-					<button onClick={handleLogout} className="main-nav-item">
-						<i className="fa fa-sign-out"></i>
-					</button>
+					{token ? (
+						<button onClick={handleLogout} className="main-nav-item">
+							<i className="fa fa-sign-out"></i>
+						</button>
+					) : (
+						<Link to="/signin" className="main-nav-item">
+							<i className="fa fa-user-circle"></i>
+							Sign in
+						</Link>
+					)}
 				</div>
 			</nav>
 		</div>

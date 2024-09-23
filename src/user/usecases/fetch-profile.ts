@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchProfile = createAsyncThunk(
-	"user/fetchProfile", //replace fetch account par fetchProfile
+	"user/fetchProfile", 
 	async (_, { rejectWithValue }) => {
 		try {
 			const response = await fetch(
