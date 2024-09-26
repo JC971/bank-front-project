@@ -14,15 +14,14 @@ function SignForm() {
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setErrorMessage("");
-		console.log("les infos:", email, password);
+		//console.log("les infos:", email, password);
 
 		try {
 			const actionResult = await dispatch(signIn({ email, password }));
-			// vérification 
+			// vérification
 			if (signIn.fulfilled.match(actionResult)) {
 				navigate("/user"); // Navigation avec succés
 			} else {
-				console.error("Failed to sign in");
 				setErrorMessage("Mail ou mot de passe invalide");
 			}
 		} catch (error) {

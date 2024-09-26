@@ -19,9 +19,7 @@ export default function User() {
 			dispatch(fetchProfile());
 		}
 	}, [token, dispatch]);
-	console.log("User State:", { firstName, lastName, isLoading, error });
 
-	//
 	const [newFirstName, setNewFirstName] = useState(firstName || "");
 	const [newLastName, setNewLastName] = useState(lastName || "");
 	const [editButton, setEditButton] = useState(false);
